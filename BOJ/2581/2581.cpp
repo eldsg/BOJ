@@ -1,11 +1,16 @@
 #include<iostream>
+#include<cmath>
+
 using namespace std;
+
 int prime(int num){
 	if (num == 1){ return 1; }
 	int i;
-	for (i = 2; i < num; i++)
-	if (num%i == 0)
-		return 1;
+	for (i = 2; i <= sqrt(num); i++){
+		if (num%i == 0){
+			return 1;
+		}
+	}
 	return 0;
 }
 int main(){
@@ -18,6 +23,9 @@ int main(){
 			k++;
 		}
 	}
-	cout << result << endl;
-	cout << result1[0] << endl;
+	if(!result) cout << "-1" << endl;
+	else{
+		cout << result << endl;
+		cout << result1[0] << endl;
+	}
 }

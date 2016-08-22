@@ -7,16 +7,15 @@ using namespace std;
 
 vector<vector<int> > m;
 int ret[101][101];
-bool visit[101][101];
+int visit[101][101];
 int t, a, k = 0;
 
 void bfs(int a, int b){
 	for(int i = 0; i<m[b].size(); i++){
-		if(visit[b][m[b][i]]) return;
+		if(visit[b][m[b][i]] == 2) return;
 		ret[a][m[b][i]] = 1;
 		ret[b][m[b][i]] = 1;
-		visit[a][m[b][i]] = true;
-		visit[b][m[b][i]] = true;
+		visit[b][m[b][i]]++;
 		bfs(a, m[b][i]);
 	}
 }
