@@ -1,16 +1,18 @@
 #include<algorithm>
 #include<cstdio>
-#include<set>
+#include<vector>
 
-std::set<int> res;
-int n, a, t, k = 1;
+using namespace std;
+
+vector<int> res;
+
+int n, a, t;
 int main(){
 	scanf("%d %d", &n, &a);
 	for(int i = 0; i < n; i++){
 		scanf("%d", &t); 
-		res.insert(t);
+		res.push_back(t);
 	}
-	auto it = res.begin();
-	for(it; k++<a; it++);
-	printf("%d\n", *(it));
+	nth_element(res.begin(), res.begin()+a-1, res.end());
+	printf("%d\n", res[a-1]);
 }
