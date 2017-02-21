@@ -1,0 +1,1 @@
+make comp function
