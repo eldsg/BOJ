@@ -1,29 +1,25 @@
 #include<cstdlib>
 #include<cstdio>
 #include<algorithm>
+#include<iostream>
 
 using namespace std;
 
-int line[500001];
-int line2[500001];
+int dp[500001];
+int up[100001];
+int down[100001];
 int main(){
-	int a, b;
+	int a, b, t;
 	scanf("%d %d", &a, &b);
-	for(int i = 0; i < a; i++){
-		int t;
-		scanf("%d", &t);
-		if(i%2){
-			line[t-1]++;
-		}
-		else{
-			line2[b-t]++;
-		}
+	for(int i = 0; i < a/2; i++) scanf("%d%d", up+i, down+i);
+	sort(up, up+a/2);
+	sort(down, down+a/2);
+	int ret2 = 1, mini = 1e9;
+	for(int i = 1; i <= b; i++){
+		int ret = a/2 - (lower_bound(up, up+a/2, i)-up);
+		ret += a/2 - (lower_bound(down, down+a/2, b-i+1)-down);
+		if(mini > ret) mini = ret, ret2=1;
+		else if(mini == ret) ret2++;
 	}
-	sort(line, line+b);
-	int ret = 0;
-	for(int k = 0; k< b; k++){
-		if(line[0] == line[k]) ret++;
-		else break;
-	}
-	printf("%d %d\n", line[0], ret);
+	printf("%d %d\n", mini, ret2);
 }
