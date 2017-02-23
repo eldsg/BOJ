@@ -1,0 +1,7 @@
+가장 작은 숫자 두개를 합쳐 나가면 된다 minheap으로 구현 가능
+
+minheap은 stl의 priority_queue의 정렬 순서를 바꾼
+
+priority_queue<int, vector<int>, greater<int> >으로 손쉽게 구현 가능
+
+maxheap은 priority_queue<int>
