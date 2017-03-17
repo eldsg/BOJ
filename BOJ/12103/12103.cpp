@@ -7,7 +7,7 @@
 using namespace std;
 
 bool possibleChange[1000001];
-
+bool p[1000001];
 int init(vector<int> &a, vector<int> &st, int n, int s, int e){
 	if(s==e){
 		if(a[s]%2) return st[n] = 1;
@@ -45,12 +45,22 @@ int main(){
 	int count = 0;
 	for(int i = 0; i < n-k+1; i++){
 		int a = query(segTree1, 1, 0, n-1, i, i+k-1);
-		if(a%2==0) continue;
+		if(a%2==0){
+			for(int j = 0; j < k; j++){
+				p[i+j] = true;
+			}
+			continue;
+		}
 		else{
 			count++;
-			nums[i+k-1]++;
-			update(segTree1, 1, 0, n-1, i+k-1, nums[i+k-1]);
-			
+			for(int j = 0; j < k; j++){
+				if(!p[i+j]){
+					p[i+j] = true;
+					nums[i+j]++;
+					update(segTree1, 1, 0, n-1, i+j, nums[i+j]);
+					break;
+				}
+			}
 		}
 	}
 	printf("%d\n", count);

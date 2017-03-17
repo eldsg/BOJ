@@ -6,7 +6,8 @@ int main(){
     cin >> b;
     int c = strlen(b);
     for(int i = 0; i<c; i++){
-        if(b[i]-'0'==1 && i==0) cout << "1";
+		if(b[i]-'0'==0 && i==0) cout << "0";
+		else if(b[i]-'0'==1 && i==0) cout << "1";
         else if(b[i]-'0'==2 && i==0) cout << "10";
         else if(b[i]-'0'==3 && i==0) cout << "11";
         else if(b[i]-'0'==0) cout << "000";
