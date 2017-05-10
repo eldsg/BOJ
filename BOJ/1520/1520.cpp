@@ -4,15 +4,14 @@
 
 using namespace std;
 
-int mapp[501][501];
-int dp[501][501];
+int mapp[520][520];
+int dp[512][512];
 int a, b;
-int result = 0;
-
 int proc(int c, int d){
 	if(c == a && d == b) return 1;
 	int &ret = dp[c][d];
-	if(ret != 0) return ret;
+	if(ret != -1) return ret;
+	ret = 0;
 	if(c+1 <= a && mapp[c][d] > mapp[c+1][d]){
 		ret += proc(c+1,d);
 	}
@@ -29,12 +28,13 @@ int proc(int c, int d){
 }
 
 int main(){
-	memset(dp, 0, sizeof(dp));
 	scanf("%d %d", &a, &b);
 	for(int i = 1; i <= a; i++){
 		for(int j = 1; j <= b; j++){
 			scanf("%d", &mapp[i][j]);
+            dp[i][j] = -1;
 		}
 	}
 	printf("%d\n", proc(1, 1));
 }
+
