@@ -1,0 +1,10 @@
+kayak의 size는 1
+catamaran의 size는 2
+
+입력으로 트럭 용량 v가 주어진다
+
+트럭의 최대 용량을 초과하지 않게끔 kayak과 catamaran을 선택하면 됨
+
+kayak과 catamaran마다 가치가 있는데 그 가치를 최대화시키는 선택을 하면 됨
+
+sorting후 연속된 선택을 기본으로 greedy하게 해결
