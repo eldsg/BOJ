@@ -1,64 +1,56 @@
-#include<cstdio>
-#include<cstdlib>
-#include<queue>
-#include<string>
-#include<iostream>
+#include <bits/stdc++.h>
 
 using namespace std;
 
+const int MAXN = 100000;
+
 int main(){
-	int t;
-	scanf("%d\n", &t);
-	while(t--){
-		int num, fullnum=0;
+	int tc, nc;
+	char cmd[MAXN+1];
+	scanf("%d", &tc);
+	while(tc--){
 		deque<int> ret;
-		string stat, nums;
-		getline(cin, stat);
-		getchar();
-		scanf("%d", &num);
-		getline(cin, nums);
-		int size = nums.size();
-		string temp = "";
-		bool f = true;
-		bool err = false;
-		for(int k=0, i=1; k<num && i< size; i++){
-			if(nums[i] >= '0' && nums[i] <= '9') fullnum = fullnum*10 + (nums[i]-'0');
-			else{
-				ret.push_back(fullnum);
-				fullnum = 0;
-				k+=1;
-			}
+		bool rev = false, err = false;
+		scanf("%s%d\n", cmd, &nc);
+		char c = getchar();
+		//cout << c << endl;
+		for(int i = 0; i < nc; i++){
+			int t;
+			scanf("%d,", &t);
+			ret.push_back(t);
 		}
-	/*	
+		getchar();
+		/*
 		for(int i = 0; i < ret.size(); i++){
 			printf("%d ", ret[i]);
 		}
-	*/	
-		size = stat.size();
-		for(int i = 0; i < size; i++){
-			if(stat[i] == 'R'){
-				if(f) f = false;
-				else f = true;
+		puts("");
+		*/
+		// rev == true -> 역방향
+		// rev == false -> 정방향
+		for(int i = 0; cmd[i]; i++){
+			//cout << rev << endl;
+			if(cmd[i] == 'R'){
+				if(rev) rev = false;
+				else rev = true;
 			}
 			else{
-				if(!ret.empty()){
-					if(!f){
-						ret.pop_back();
-					}
-					else{
-						ret.pop_front();	
-					}
-				}
-				else{
+				if(ret.empty()){
 					err = true;
 					break;
+				}
+				if(rev){
+					ret.pop_back();
+				}
+				else{
+					ret.pop_front();
 				}
 			}
 		}
 		if(err) printf("error\n");
 		else{
-			size = ret.size();
-			if(f){
+			int size = ret.size();
+			if(!rev){
 				printf("[");
 				for(int i = 0; i < size; i++){
 					printf("%d", ret[i]);
