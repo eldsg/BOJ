@@ -1,13 +1,4 @@
-#include<cstdio>
-#include<cstdlib>
-#include<iostream>
-#include<map>
-#include<vector>
-#include<queue>
-#include<algorithm>
-#include<functional>
-#include<string>
-#include<cstring>
+#include <bits/stdc++.h>
 
 using namespace std;
 
