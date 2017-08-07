@@ -1,16 +1,12 @@
-#include<cstdio>
-#include<cstdlib>
-#include<iostream>
-#include<algorithm>
-#include<vector>
-#include<map>
+#include <bits/stdc++.h>
 
 using namespace std;
-vector<long long> ab;
-vector<long long> cd;
+vector<int> ab;
+vector<int> cd;
+int a[4001], b[4001], c[4001], d[4001];
 int main(){
-	int n, i, j, index=0, ret=0;
-	int a[4001], b[4001], c[4001], d[4001];
+	int n, i, j, index=0;
+    long long ret = 0;
 	scanf("%d", &n);
 	for(i=0; i<n; i++){
         scanf("%d %d %d %d", &a[i], &b[i], &c[i], &d[i]);
@@ -22,11 +18,10 @@ int main(){
 		}
 	}
 	sort(ab.begin(), ab.end());
-	for(i=0; i<ab.size(); i++){
-        auto low = lower_bound(ab.begin(), ab.end(), cd[i]*-1);
-        auto upper = upper_bound(ab.begin(), ab.end(), cd[i]*-1);
-        ret += upper-low;
+	for(auto i : cd){
+        auto range = equal_range(ab.begin(), ab.end(), -i);
+        ret += 1ll*(range.second-range.first);
 	}
-	printf("%d\n", ret);
+	printf("%lld\n", ret);
 
 }

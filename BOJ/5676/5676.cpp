@@ -1,50 +1,53 @@
-#include <cstdio>
-#include <cstring>
-int n = 111111;
-int _0[1<<20],minus[1<<20],N,K;
-bool select;
-int read(int *tree,int idx) {
-    int sum = 0;
-    while ( idx > 0 ) {
-        sum += tree[idx];
-        idx -= ( idx & -idx);
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int zero[222222], mi[222222], a, b, n, k;
+int pn[111111];
+char c;
+int sum(int *t, int index){
+    int ans = 0;
+    while(index > 0){
+        ans += t[index];
+        index -= (index & -index);
     }
-    return sum;
+    return ans;
 }
-void update(int *tree,int idx,int val) {
-    while ( idx <= n ) {
-        tree[idx] +=val;
-        idx += (idx & -idx);
+
+void update(int *t, int index, int num){
+    while(index <= 222222){
+        t[index] += num;
+        index += (index & -index);
     }
 }
-int x[111111];
-int main() {
-    for ( ; scanf("%d%d",&N,&K) == 2 ; ) {
-        memset(_0,0,sizeof(_0));
-        memset(minus,0,sizeof(minus));
-        memset(x,0,sizeof(x));
-        for ( int i = 1;  i <= N ; i++ ) {
-            scanf("%d",&x[i]);
-            if ( x[i] < 0 ) update(minus,i,1);
-            else if ( x[i] == 0 ) update(_0,i,1);
+int main(){
+    while(scanf("%d%d", &a, &b) == 2){
+        memset(mi, 0, sizeof(mi));
+        memset(zero, 0, sizeof(zero));
+        memset(pn, 0, sizeof(pn));
+        for(int i = 1; i <= a; i++) {
+            scanf("%d", &pn[i]);
+            if(pn[i] < 0) update(mi, i, 1);
+            if(pn[i] == 0) update(zero, i, 1);
         }
-        for ( int i = 0 ; i < K ; i++ ) {
-            char tmp[111];int a,b;
-            scanf("%s %d %d",tmp,&a,&b);
-            if ( tmp[0] == 'C' ) {
-                if ( x[a] < 0 ) update(minus,a,-1);
-                else if ( x[a] == 0 ) update(_0,a,-1);
-                x[a] = b;
-                if ( x[a] < 0 ) update(minus,a,1);
-                else if ( x[a] == 0 ) update(_0,a,1);
+        for(int i = 0; i < b; i++){
+            scanf(" %c %d %d", &c, &n, &k);
+           // printf("")
+            if(c == 'C'){
+                if(pn[n] < 0) update(mi, n, -1);
+                else if(pn[n] == 0) update(zero, n, -1);
+                pn[n] = k;
+                if(pn[n] < 0) update(mi, n, 1);
+                else if(pn[n] == 0) update(zero, n, 1);
             }
-            else {
-                int zeroCount=read(_0,b) - read(_0,a-1);
-                int minusCount = read(minus,b)-read(minus,a-1);
-                printf("%c",zeroCount?'0':minusCount%2==1?'-':'+');
+            else{
+                int zc = sum(zero, k) - sum(zero, n-1);
+                int mc = sum(mi, k) - sum(mi, n-1);
+                if(zc) printf("0");
+                else if(mc&1) printf("-");
+                else printf("+");
             }
         }
         puts("");
     }
-    return 0;
 }
