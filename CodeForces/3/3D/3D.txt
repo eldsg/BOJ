@@ -1,5 +1,0 @@
-올바른 bracket을 만들어내야 한다
-
-?자리에 열린 bracket과 닫힌 bracket을 넣을 때 필요한 value가 주어지는데
-
-greedy하게 만나는 ?마다 닫힌 bracket을 넣는다. 잘못된 bracket이 될 때마다 열린 bracket으로 바꿔주며 값을 갱신

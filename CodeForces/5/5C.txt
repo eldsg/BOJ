@@ -1,2 +1,0 @@
-닫히는 bracket이 오면 dp[i] = i - leftpos[prev] + 1 + dp[leftpos[prev]-1], prev--
-열린 bracket이 오면 leftpos[++prev] = i
